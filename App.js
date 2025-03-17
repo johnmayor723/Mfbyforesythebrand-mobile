@@ -137,7 +137,7 @@ const AppNavigator = () => {
           <Stack.Screen name="Auth" component={AuthScreen} />
           <Stack.Screen name="SignUp" component={SignUpScreen} />
           <Stack.Screen name="ResetPassword" component={ResetPasswordScreen} />
-          <Stack.Screen name="GoogleLogin" component={GoogleLoginScreen} /> {/* Fixed naming */}
+          <Stack.Screen name="Google Login" component={GoogleLoginScreen} /> {/* Fixed naming */}
         </>
       )}
     </Stack.Navigator>

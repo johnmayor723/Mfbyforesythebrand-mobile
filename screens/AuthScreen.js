@@ -38,7 +38,7 @@ const AuthScreen = ({ navigation }) => {
     }
   };
 const handleGoogleLogin = () => {
-  navigation.navigate('GoogleLoginScreen');
+  navigation.navigate('Google Login');
 };
   
 
