@@ -84,9 +84,9 @@ const handleGoogleLogin = () => {
       </TouchableOpacity>
    {/* Google Login Button */}
       <TouchableOpacity style={styles.googleButton} onPress={handleGoogleLogin}>
-        <Image source={require('../assets/google-icon.png')} style={styles.googleIcon} />
-        <Text style={styles.googleButtonText}>Login with Google</Text>
-      </TouchableOpacity>
+  <Image source={require('../assets/google-icon.png')} style={styles.googleIcon} />
+  <Text style={styles.googleButtonText}>Login with Google</Text>
+</TouchableOpacity>
 
       {/* Navigate to Signup */}
       <TouchableOpacity onPress={() => navigation.navigate('SignUp')}>
@@ -104,6 +104,35 @@ const styles = StyleSheet.create({
     backgroundColor: '#FFFFFF',
     paddingHorizontal: 16,
   },
+  googleButton: {
+  flexDirection: 'row', // Aligns items horizontally
+  alignItems: 'center', // Centers content vertically
+  justifyContent: 'center', // Centers content horizontally
+  backgroundColor: '#FFFFFF',
+  paddingVertical: 12,
+  paddingHorizontal: 20,
+  borderRadius: 25,
+  borderWidth: 1,
+  borderColor: '#D9D9D9',
+  width: '100%',
+  shadowColor: '#000',
+  shadowOffset: { width: 0, height: 2 },
+  shadowOpacity: 0.1,
+  shadowRadius: 4,
+  elevation: 3, // Adds a subtle shadow effect on Android
+},
+
+googleIcon: {
+  width: 24,
+  height: 24,
+  marginRight: 10, // Space between icon and text
+},
+
+googleButtonText: {
+  color: '#333',
+  fontSize: 16,
+  fontWeight: 'bold',
+},
   logo: {
     width: 200,
     height: 200,
