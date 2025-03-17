@@ -1,182 +1,154 @@
-import React, { useState, useContext } from 'react';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet, Image, ActivityIndicator, Alert } from 'react-native';
+import React, { useState, useEffect, useContext } from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { createDrawerNavigator } from '@react-navigation/drawer';
+import { Ionicons } from '@expo/vector-icons';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import axios from 'axios';
-import { AuthContext } from '../contexts/AuthContext'; // Import the AuthContext
+import { AuthContext, AuthProvider } from './contexts/AuthContext';
 
-const AuthScreen = ({ navigation }) => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [isLoading, setIsLoading] = useState(false);
+// Import Screens
+import AboutScreen from "./screens/AboutScreen.js";
+import SplashScreen from './screens/SplashScreen';
+import AuthScreen from './screens/AuthScreen';
+import SignUpScreen from './screens/SignUpScreen';
+import HomeScreen from './screens/HomeScreen';
+import UserProfileScreen from './screens/UserProfileScreen';
+import CartScreen from './screens/CartScreen';
+import ContactScreen from './screens/ContactScreen';
+import PaymentScreen from './screens/PaymentScreen';
+import OrderTrackingScreen from './screens/OrderTrackingScreen';
+import HelpScreen from './screens/HelpScreen';
+import TrackingScreen from './screens/TrackingScreen';
+import ItemScreen from './screens/ItemScreen.js';
+import CategoriesScreen from './screens/CategoriesScreen.js';
+import FruitsScreen from './screens/FruitsScreen.js';
+import VegetablesScreen from './screens/VegetablesScreen.js';
+import DairyScreen from './screens/DairyScreen.js';
+import MeatScreen from './screens/MeatScreen.js';
+import OilProductsScreen from './screens/OilProductsScreen.js';
+import SnacksScreen from './screens/SnacksScreen.js';
+import LogoutScreen from './screens/LogoutScreen'; // New logout screen
+import CheckoutScreen from "./screens/CheckoutScreen";
+import SuccessScreen from "./screens/SuccessScreen.js";
+import FinalCheckoutScreen from "./screens/FinalCheckoutScreen.js";
 
-  const { login } = useContext(AuthContext); // Access the login function from the AuthContext
+const Stack = createStackNavigator();
+const Tab = createBottomTabNavigator();
+const Drawer = createDrawerNavigator();
 
-  const handleLogin = async () => {
-    setIsLoading(true); // Show loader
+// Bottom Tab Navigator Component
+function BottomTabNavigator() {
+  return (
+    <Tab.Navigator
+      screenOptions={({ route }) => ({
+        tabBarIcon: ({ color, size }) => {
+          let iconName;
+          if (route.name === 'TabHome') {
+            iconName = 'home';
+          } else if (route.name === 'TabCategories') {
+            iconName = 'grid-outline';
+          } else if (route.name === 'TabProfile') {
+            iconName = 'person';
+          } else if (route.name === 'TabCart') {
+            iconName = 'cart';
+          }
+          return <Ionicons name={iconName} size={size} color={color} />;
+        },
+        tabBarActiveTintColor: '#FF7E00',
+        tabBarInactiveTintColor: 'gray',
+        tabBarStyle: { backgroundColor: '#fff' },
+        headerShown: false,
+      })}
+    >
+      <Tab.Screen name="TabHome" component={HomeScreen} options={{ title: "Home" }} />
+      <Tab.Screen name="TabCategories" component={CategoriesScreen} options={{ title: "Categories" }} />
+      <Tab.Screen name="TabProfile" component={UserProfileScreen} options={{ title: "Profile" }} />
+      <Tab.Screen name="TabCart" component={CartScreen} options={{ title: "Cart" }} />
+    </Tab.Navigator>
+  );
+}
 
-    try {
-      const endpoint = 'https://api.foodliie.com/api/auth/login';
-      const payload = { email, password };
+// Drawer Navigator Component
+function DrawerNavigator() {
+  return (
+    <Drawer.Navigator
+      initialRouteName="DrawerHome"
+      drawerStyle={{
+        backgroundColor: 'rgba(255, 126, 0, 0.5)',
+      }}
+    >
+      <Drawer.Screen name="DrawerHome" component={BottomTabNavigator} options={{ title: "Menu", headerShown: true }} />
+      <Drawer.Screen name="DrawerAbout" component={AboutScreen} options={{ title: "About", headerShown: true }} />
+      <Drawer.Screen name="DrawerProfile" component={UserProfileScreen} options={{ title: "Profile", headerShown: true }} />
+      <Drawer.Screen name="DrawerContact" component={HelpScreen} options={{ title: "Help", headerShown: true }} />
+      <Drawer.Screen name="DrawerTracking" component={TrackingScreen} options={{ title: "Tracking", headerShown: true }} />
+      <Drawer.Screen name="DrawerLogout" component={LogoutScreen} options={{ title: "Logout", headerShown: true }} />
+    </Drawer.Navigator>
+  );
+}
 
-      // Make the API request using axios
-      const response = await axios.post(endpoint, payload);
+const AppNavigator = () => {
+  const { isAuthenticated, setIsAuthenticated } = useContext(AuthContext);
+  const [isLoading, setIsLoading] = useState(true);
 
-      const { token, user } = response.data;
+  useEffect(() => {
+    const checkAuthStatus = async () => {
+      try {
+        const user = await AsyncStorage.getItem('user');
+        if (user) {
+          setIsAuthenticated(true);
+        }
+      } catch (error) {
+        console.error('Error fetching user from AsyncStorage:', error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+    checkAuthStatus();
+  }, []);
 
-      // Store the token and user in AsyncStorage
-      await AsyncStorage.setItem('token', token);
-      await AsyncStorage.setItem('user', JSON.stringify(user));
-
-      Alert.alert('Login successful!', `Welcome ${user.name}`);
-      setIsLoading(false); // Hide loader
-      login();
-
-    } catch (error) {
-      setIsLoading(false); // Hide loader
-      console.error(error);
-      Alert.alert('Login failed', error.response?.data?.message || 'Something went wrong');
-    }
-  };
-const handleGoogleLogin = () => {
-  navigation.navigate('Google Login');
-};
-  
+  if (isLoading) {
+    return <SplashScreen />;
+  }
 
   return (
-    <View style={styles.container}>
-      {/* Logo */}
-      <Image source={require('../assets/App 1024x1024px.jpg')} style={styles.logo} />
-
-      {/* Welcome text */}
-      <Text style={styles.welcomeText}>Welcome To Market Picks</Text>
-
-      {/* Email Input */}
-      <TextInput
-        style={styles.input}
-        placeholder="Enter your email"
-        placeholderTextColor="#999"
-        value={email}
-        onChangeText={setEmail}
-      />
-
-      {/* Password Input */}
-      <TextInput
-        style={styles.input}
-        placeholder="Enter your password"
-        placeholderTextColor="#999"
-        secureTextEntry
-        value={password}
-        onChangeText={setPassword}
-      />
-
-      {/* Forgot Password Link */}
-      <TouchableOpacity onPress={() => navigation.navigate('ResetPassword')}>
-        <Text style={styles.forgotPasswordText}>Forgot Password?</Text>
-      </TouchableOpacity>
-
-      {/* Login Button */}
-      <TouchableOpacity style={styles.button} onPress={handleLogin} disabled={isLoading}>
-        {isLoading ? (
-          <ActivityIndicator size="small" color="#FFFFFF" />
-        ) : (
-          <Text style={styles.buttonText}>Login</Text>
-        )}
-      </TouchableOpacity>
-   {/* Google Login Button */}
-      <TouchableOpacity style={styles.googleButton} onPress={handleGoogleLogin}>
-  <Image source={require('../assets/google-icon.png')} style={styles.googleIcon} />
-  <Text style={styles.googleButtonText}>Login with Google</Text>
-</TouchableOpacity>
-
-      {/* Navigate to Signup */}
-      <TouchableOpacity onPress={() => navigation.navigate('SignUp')}>
-        <Text style={styles.signupText}>Don't have an account? Sign up here</Text>
-      </TouchableOpacity>
-    </View>
+    <Stack.Navigator screenOptions={{ headerShown: false }}>
+      {isAuthenticated ? (
+        <>
+          <Stack.Screen name="Main" component={DrawerNavigator} />
+          <Stack.Screen name="Single Product" component={ItemScreen} />
+          <Stack.Screen name="Cart" component={CartScreen} />
+          <Stack.Screen name="Payment" component={PaymentScreen} />
+          <Stack.Screen name="TrackingResult" component={OrderTrackingScreen} />
+          <Stack.Screen name="Fruit" component={FruitsScreen} />
+          <Stack.Screen name="Checkout" component={CheckoutScreen} />
+          <Stack.Screen name="Vegetable" component={VegetablesScreen} />
+          <Stack.Screen name="Meat" component={MeatScreen} />
+          <Stack.Screen name="Snack" component={SnacksScreen} />
+          <Stack.Screen name="Oil Product" component={OilProductsScreen} />
+          <Stack.Screen name="Dairy" component={DairyScreen} />
+          <Stack.Screen name="FinalCheckout" component={FinalCheckoutScreen} />
+  
+          <Stack.Screen name="Success" component={SuccessScreen} />
+        </>
+      ) : (
+        <>
+          <Stack.Screen name="Splash" component={SplashScreen} />
+          <Stack.Screen name="Auth" component={AuthScreen} />
+          <Stack.Screen name="SignUp" component={SignUpScreen} />
+        </>
+      )}
+    </Stack.Navigator>
   );
 };
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#FFFFFF',
-    paddingHorizontal: 16,
-  },
-  googleButton: {
-  flexDirection: 'row', // Aligns items horizontally
-  alignItems: 'center', // Centers content vertically
-  justifyContent: 'center', // Centers content horizontally
-  backgroundColor: '#FFFFFF',
-  paddingVertical: 12,
-  paddingHorizontal: 20,
-  borderRadius: 25,
-  borderWidth: 1,
-  borderColor: '#D9D9D9',
-  width: '100%',
-  shadowColor: '#000',
-  shadowOffset: { width: 0, height: 2 },
-  shadowOpacity: 0.1,
-  shadowRadius: 4,
-  elevation: 3, // Adds a subtle shadow effect on Android
-},
-
-googleIcon: {
-  width: 24,
-  height: 24,
-  marginRight: 10, // Space between icon and text
-},
-
-googleButtonText: {
-  color: '#333',
-  fontSize: 16,
-  fontWeight: 'bold',
-},
-  logo: {
-    width: 200,
-    height: 200,
-    marginBottom: 20,
-  },
-  welcomeText: {
-    fontSize: 34,
-    fontWeight: 'bold',
-    color: '#2D7B30',
-    marginBottom: 20,
-  },
-  input: {
-    width: '100%',
-    padding: 15,
-    backgroundColor: '#F0F0F0',
-    borderWidth: 1,
-    borderColor: '#2D7B30',
-    borderRadius: 25, // Rounded corners
-    marginBottom: 20,
-    color: '#2D7B30',
-  },
-  forgotPasswordText: {
-    color: '#FF7E00',
-    fontSize: 14,
-    alignSelf: 'flex-end',
-    marginBottom: 15,
-  },
-  button: {
-    backgroundColor: '#FF7E00',
-    padding: 15,
-    borderRadius: 25,
-    width: '100%',
-    alignItems: 'center',
-    marginBottom: 20,
-  },
-  buttonText: {
-    color: '#FFFFFF',
-    fontWeight: 'bold',
-    fontSize: 16,
-  },
-  signupText: {
-    color: '#2D7B30',
-    fontSize: 16,
-  },
-});
-
-export default AuthScreen;
+export default function App() {
+  return (
+    <AuthProvider>
+      <NavigationContainer>
+        <AppNavigator />
+      </NavigationContainer>
+    </AuthProvider>
+  );
+}
