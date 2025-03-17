@@ -12,7 +12,6 @@ import AboutScreen from "./screens/AboutScreen.js";
 import SplashScreen from './screens/SplashScreen';
 import AuthScreen from './screens/AuthScreen';
 import SignUpScreen from './screens/SignUpScreen';
-import ResetPasswordScreen from './screens/ResetPasswordScreen';
 import HomeScreen from './screens/HomeScreen';
 import UserProfileScreen from './screens/UserProfileScreen';
 import CartScreen from './screens/CartScreen';
@@ -29,11 +28,12 @@ import DairyScreen from './screens/DairyScreen.js';
 import MeatScreen from './screens/MeatScreen.js';
 import OilProductsScreen from './screens/OilProductsScreen.js';
 import SnacksScreen from './screens/SnacksScreen.js';
-import LogoutScreen from './screens/LogoutScreen'; // Fixed duplicate import
+import LogoutScreen from './screens/LogoutScreen'; // New logout screen
 import CheckoutScreen from "./screens/CheckoutScreen";
 import SuccessScreen from "./screens/SuccessScreen.js";
 import FinalCheckoutScreen from "./screens/FinalCheckoutScreen.js";
 import GoogleLoginScreen from "./screens/GoogleLoginScreen.js"; // Fixed filename
+
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -76,14 +76,16 @@ function DrawerNavigator() {
   return (
     <Drawer.Navigator
       initialRouteName="DrawerHome"
-      screenOptions={{ headerShown: true }}
+      drawerStyle={{
+        backgroundColor: 'rgba(255, 126, 0, 0.5)',
+      }}
     >
-      <Drawer.Screen name="DrawerHome" component={BottomTabNavigator} options={{ title: "Menu" }} />
-      <Drawer.Screen name="DrawerAbout" component={AboutScreen} options={{ title: "About" }} />
-      <Drawer.Screen name="DrawerProfile" component={UserProfileScreen} options={{ title: "Profile" }} />
-      <Drawer.Screen name="DrawerContact" component={HelpScreen} options={{ title: "Help" }} />
-      <Drawer.Screen name="DrawerTracking" component={TrackingScreen} options={{ title: "Tracking" }} />
-      <Drawer.Screen name="DrawerLogout" component={LogoutScreen} options={{ title: "Logout" }} />
+      <Drawer.Screen name="DrawerHome" component={BottomTabNavigator} options={{ title: "Menu", headerShown: true }} />
+      <Drawer.Screen name="DrawerAbout" component={AboutScreen} options={{ title: "About", headerShown: true }} />
+      <Drawer.Screen name="DrawerProfile" component={UserProfileScreen} options={{ title: "Profile", headerShown: true }} />
+      <Drawer.Screen name="DrawerContact" component={HelpScreen} options={{ title: "Help", headerShown: true }} />
+      <Drawer.Screen name="DrawerTracking" component={TrackingScreen} options={{ title: "Tracking", headerShown: true }} />
+      <Drawer.Screen name="DrawerLogout" component={LogoutScreen} options={{ title: "Logout", headerShown: true }} />
     </Drawer.Navigator>
   );
 }
@@ -129,15 +131,16 @@ const AppNavigator = () => {
           <Stack.Screen name="Oil Product" component={OilProductsScreen} />
           <Stack.Screen name="Dairy" component={DairyScreen} />
           <Stack.Screen name="FinalCheckout" component={FinalCheckoutScreen} />
+  
           <Stack.Screen name="Success" component={SuccessScreen} />
         </>
       ) : (
         <>
           <Stack.Screen name="Splash" component={SplashScreen} />
           <Stack.Screen name="Auth" component={AuthScreen} />
+            <Stack.Screen name="GoogleLogin" component={GoogleLoginScreen} />
+
           <Stack.Screen name="SignUp" component={SignUpScreen} />
-          <Stack.Screen name="ResetPassword" component={ResetPasswordScreen} />
-          <Stack.Screen name="Google Login" component={GoogleLoginScreen} /> {/* Fixed naming */}
         </>
       )}
     </Stack.Navigator>
