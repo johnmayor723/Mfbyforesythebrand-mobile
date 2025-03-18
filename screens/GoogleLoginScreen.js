@@ -8,6 +8,8 @@ const GOOGLE_CLIENT_ID = "328728614931-3ksi7t8cv8pt1t0d1us8d9opeg6rsnvr.apps.goo
 const REDIRECT_URI = "https://marketspick.com/auth/google/callback";
 const GOOGLE_AUTH_URL = `https://accounts.google.com/o/oauth2/v2/auth?client_id=${GOOGLE_CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=code&scope=email%20profile`;
 
+const GOOGLE_CLIENT_SECRET = "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"
+
 const GoogleLoginScreen = ({ navigation }) => {
   const handleGoogleResponse = async (event) => {
     const { url } = event;
@@ -19,7 +21,7 @@ const GoogleLoginScreen = ({ navigation }) => {
           // Exchange code for access token
           const tokenResponse = await axios.post("https://oauth2.googleapis.com/token", {
             client_id: GOOGLE_CLIENT_ID,
-            client_secret: "YOUR_GOOGLE_CLIENT_SECRET",
+            client_secret: GOOGLE_CLIENT_SECRET,
             code,
             redirect_uri: REDIRECT_URI,
             grant_type: "authorization_code",

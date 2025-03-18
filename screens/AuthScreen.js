@@ -83,14 +83,14 @@ navigation.navigate('GoogleLogin');
           <Text style={styles.buttonText}>Login</Text>
         )}
       </TouchableOpacity>
-      <TouchableOpacity style={styles.googleButton} onPress={handleGoogleLogin}>
-  <Image source={require('../assets/google-icon.png')} style={styles.googleIcon} />
-  <Text style={styles.googleButtonText}>Login with Google</Text>
-</TouchableOpacity>
+     /* Navigate to Signup */}
+      <TouchableOpacity onPress={() => navigation.navigate('SignUp')}>
+        <Text style={styles.signupText}>Don't have an acvount? Sign decodeURIComponent.</Text>
+      </TouchableOpacity>
 
       {/* Navigate to Signup */}
-      <TouchableOpacity onPress={() => navigation.navigate('SignUp')}>
-        <Text style={styles.signupText}>Don't have an account? Sign up here</Text>
+      <TouchableOpacity onPress={() => navigation.navigate('ResetPassword')}>
+        <Text style={styles.signupText}>Forgot your password? Reset it.</Text>
       </TouchableOpacity>
     </View>
   );

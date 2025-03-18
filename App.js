@@ -33,6 +33,11 @@ import CheckoutScreen from "./screens/CheckoutScreen";
 import SuccessScreen from "./screens/SuccessScreen.js";
 import FinalCheckoutScreen from "./screens/FinalCheckoutScreen.js";
 import GoogleLoginScreen from "./screens/GoogleLoginScreen.js"; // Fixed filename
+import PhoneAuthScreen from "./screens/PhoneAuthScreen.js"; // Fixed filename
+import SendOtpScreen from "./screens/SendOtpScreen.js"; // Fixed filename
+import ResetPasswordScreen from "./screens/ResetPasswordScreen.js"; // Fixed filename
+
+
 
 
 const Stack = createStackNavigator();
@@ -139,7 +144,9 @@ const AppNavigator = () => {
           <Stack.Screen name="Splash" component={SplashScreen} />
           <Stack.Screen name="Auth" component={AuthScreen} />
             <Stack.Screen name="GoogleLogin" component={GoogleLoginScreen} />
-
+            <Stack.Screen name="PhoneAuth" component={PhoneAuthScreen} />
+            <Stack.Screen name="SendOtp" component={SendOtpScreen} />
+             <Stack.Screen name="ResetPassword" component={ResetPasswordScreen} />
           <Stack.Screen name="SignUp" component={SignUpScreen} />
         </>
       )}
