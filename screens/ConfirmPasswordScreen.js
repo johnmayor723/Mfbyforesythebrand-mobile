@@ -77,4 +77,32 @@ const styles = StyleSheet.create({
   heading: {
     fontSize: 24,
     fontWeight: 'bold',
-    color:
+    color: '#2D7B30',
+    marginBottom: 20,
+  },
+  input: {
+    width: '100%',
+    padding: 15,
+    backgroundColor: '#F0F0F0',
+    borderWidth: 1,
+    borderColor: '#2D7B30',
+    borderRadius: 25,
+    marginBottom: 20,
+    color: '#2D7B30',
+  },
+  button: {
+    backgroundColor: '#FF7E00',
+    padding: 15,
+    borderRadius: 25,
+    width: '100%',
+    alignItems: 'center',
+    marginTop: 10,
+  },
+  buttonText: {
+    color: '#FFFFFF',
+    fontWeight: 'bold',
+    fontSize: 16,
+  },
+});
+
+export default ResetPasswordScreen;
