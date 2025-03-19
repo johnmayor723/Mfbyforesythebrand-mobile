@@ -16,13 +16,13 @@ const ResetPasswordScreen = ({ navigation }) => {
     setIsLoading(true);
 
     try {
-      const endpoint = 'https://api.foodliie.com/api/auth/request-password-reset';
+      const endpoint = 'https://api.foodliie.com/api/auth/mobile-request-password-reset';
       const payload = { email };
 
       await axios.post(endpoint, payload);
 
-      Alert.alert('Success', 'Password reset requested! check your email.');
-      navigation.navigate('Auth'); // Navigate back to login
+      Alert.alert('Success', 'Password reset requested! check your email for otp.');
+      navigation.navigate('ConfirmPassword'); // Navigate back to login
     } catch (error) {
       console.error(error);
       Alert.alert('Reset Failed', error.response?.data?.message || 'Something went wrong.');
