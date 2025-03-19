@@ -22,7 +22,7 @@ const ResetPasswordScreen = ({ navigation }) => {
       await axios.post(endpoint, payload);
 
       Alert.alert('Success', 'Password reset requested! check your email.');
-      navigation.navigate('AuthScreen'); // Navigate back to login
+      navigation.navigate('Auth'); // Navigate back to login
     } catch (error) {
       console.error(error);
       Alert.alert('Reset Failed', error.response?.data?.message || 'Something went wrong.');
