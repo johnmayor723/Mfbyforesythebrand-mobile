@@ -36,6 +36,7 @@ import GoogleLoginScreen from "./screens/GoogleLoginScreen.js"; // Fixed filenam
 import PhoneAuthScreen from "./screens/PhoneAuthScreen.js"; // Fixed filename
 import SendOtpScreen from "./screens/SendOtpScreen.js"; // Fixed filename
 import ResetPasswordScreen from "./screens/ResetPasswordScreen.js"; // Fixed filename
+import ConfirmPasswordScreen from "./screens/ConfirmPasswordScreen.js"; // Fixed filename
 
 
 
@@ -147,6 +148,7 @@ const AppNavigator = () => {
             <Stack.Screen name="PhoneAuth" component={PhoneAuthScreen} />
             <Stack.Screen name="SendOtp" component={SendOtpScreen} />
              <Stack.Screen name="ResetPassword" component={ResetPasswordScreen} />
+             <Stack.Screen name="ConfirmPassword" component={ConfirmPasswordScreen} />
           <Stack.Screen name="SignUp" component={SignUpScreen} />
         </>
       )}
