@@ -85,12 +85,12 @@ navigation.navigate('GoogleLogin');
       </TouchableOpacity>
      /* Navigate to Signup */}
       <TouchableOpacity onPress={() => navigation.navigate('SignUp')}>
-        <Text style={styles.signupText}>Don't have an acvount? Sign decodeURIComponent.</Text>
+        <Text style={styles.signupText}>Don't have an account? Sign up.</Text>
       </TouchableOpacity>
 
       {/* Navigate to Signup */}
       <TouchableOpacity onPress={() => navigation.navigate('ResetPassword')}>
-        <Text style={styles.signupText}>Forgot your password? Reset it.</Text>
+        <Text style={styles.signupText}>Forgot your password? Click here.</Text>
       </TouchableOpacity>
     </View>
   );

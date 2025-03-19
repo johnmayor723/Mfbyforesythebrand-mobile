@@ -42,7 +42,7 @@ const ResetPasswordScreen = ({ navigation }) => {
         style={styles.input}
         placeholder="Enter Email"
         placeholderTextColor="#999"
-        secureTextEntry
+        
         value={email}
         onChangeText={setEmail}
       />
