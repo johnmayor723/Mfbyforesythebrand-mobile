@@ -50,7 +50,7 @@ const HomeScreen = () => {
 
     // Navigate to CategoriesScreen with selected category
     const handleCategoryPress = (category) => {
-        navigation.navigate('CategoriesScreen', { category });
+        navigation.navigate('CategoriesScreen', { category, products });
     };
 
     return (
