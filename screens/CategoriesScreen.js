@@ -51,7 +51,10 @@ const CategoriesScreen = () => {
 
     return (
         <ScrollView style={styles.container}>
-            <FlatList
+            <View style={styles.heroSection}>
+                <Image source={require('../assets/Mobile Banner 1200 x 900-1.png')} style={styles.heroImage} />
+            </View>
+        <FlatList
                 data={categories}
                 renderItem={({ item }) => (
                     <TouchableOpacity style={styles.categoryButton} onPress={() => handleCategoryPress(item.title)}>
@@ -88,6 +91,8 @@ const CategoriesScreen = () => {
 };
 
 const styles = StyleSheet.create({
+    heroSection: { alignItems: 'center', marginBottom: 16, marginTop: 20 },
+    heroImage: { width: '100%', height: 130, borderRadius: 10 },
     container: { flex: 1, backgroundColor: '#FFFFFF', padding: 16 },
     categoriesContainer: { paddingVertical: 10, marginTop: 10 },
     categoryButton: { backgroundColor: '#F0F0F0', borderRadius: 15, padding: 8, marginRight: 10, alignItems: 'center', width: 80 },
