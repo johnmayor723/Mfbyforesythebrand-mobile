@@ -129,7 +129,7 @@ const AppNavigator = () => {
           <Stack.Screen name="Cart" component={CartScreen} />
           <Stack.Screen name="Payment" component={PaymentScreen} />
           <Stack.Screen name="TrackingResult" component={OrderTrackingScreen} />
-          <Stack.Screen name="Fruit" component={FruitsScreen} />
+          <Stack.Screen name="CategoriesScreen" component={CategoriesScreen} />
           <Stack.Screen name="Checkout" component={CheckoutScreen} />
           <Stack.Screen name="Vegetable" component={VegetablesScreen} />
           <Stack.Screen name="Meat" component={MeatScreen} />
