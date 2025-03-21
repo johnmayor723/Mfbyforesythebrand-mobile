@@ -1,10 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, FlatList, TouchableOpacity, StyleSheet, Image, ActivityIndicator, ScrollView } from 'react-native';
 import { useNavigation, useRoute } from '@react-navigation/native';
-import axios from 'axios';
-import addToCartService from "../services/addToCartService";
 
-// Categories Data
 const categories = [
     { id: '1', title: 'Grains & Cereals', icon: '🌾' },
     { id: '2', title: 'Tubers & Roots', icon: '🥔' },
@@ -23,11 +20,27 @@ const categories = [
 const CategoriesScreen = () => {
     const route = useRoute();
     const navigation = useNavigation();
-    const { category, products } = route.params;
 
-    // Filter products based on category
-    const filteredProducts = products.filter(product => 
-      product.category === category);
+    const [category, setCategory] = useState(route.params?.category || categories[0].title);
+    const [products, setProducts] = useState(route.params?.products || []);
+    const [loading, setLoading] = useState(false);
+
+    // Update category when route.params changes
+    useEffect(() => {
+        if (route.params?.category) {
+            setCategory(route.params.category);
+        }
+        if (route.params?.products) {
+            setProducts(route.params.products);
+        }
+    }, [route.params?.category, route.params?.products]);
+
+    const filteredProducts = products.filter(product => product.category === category);
+
+    const handleCategoryPress = (selectedCategory) => {
+        navigation.navigate('CategoriesScreen', { category: selectedCategory, products });
+    };
+
     if (loading) {
         return (
             <View style={styles.loader}>
@@ -36,19 +49,8 @@ const CategoriesScreen = () => {
         );
     }
 
-    // Navigate to CategoriesScreen with selected category
-    const handleCategoryPress = (category) => {
-        navigation.navigate('CategoriesScreen', { category });
-    };
-
     return (
         <ScrollView style={styles.container}>
-            {/* Hero Section */}
-            <View style={styles.heroSection}>
-                <Image source={require('../assets/Mobile Banner 1200 x 900-1.png')} style={styles.heroImage} />
-            </View>
-
-            {/* Categories Section */}
             <FlatList
                 data={categories}
                 renderItem={({ item }) => (
@@ -63,8 +65,7 @@ const CategoriesScreen = () => {
                 contentContainerStyle={styles.categoriesContainer}
             />
 
-            {/* Featured Products */}
-            <Text style={styles.featuredTitle}>Featured Products</Text>
+            <Text style={styles.featuredTitle}>{category}</Text>
             <FlatList
                 data={filteredProducts}
                 renderItem={({ item }) => (
@@ -80,7 +81,7 @@ const CategoriesScreen = () => {
                 keyExtractor={item => item.id}
                 numColumns={2}
                 columnWrapperStyle={styles.row}
-                scrollEnabled={false} // Prevent internal FlatList scrolling
+                scrollEnabled={false}
             />
         </ScrollView>
     );
@@ -88,8 +89,6 @@ const CategoriesScreen = () => {
 
 const styles = StyleSheet.create({
     container: { flex: 1, backgroundColor: '#FFFFFF', padding: 16 },
-    heroSection: { alignItems: 'center', marginBottom: 16, marginTop: 20 },
-    heroImage: { width: '100%', height: 130, borderRadius: 10 },
     categoriesContainer: { paddingVertical: 10, marginTop: 10 },
     categoryButton: { backgroundColor: '#F0F0F0', borderRadius: 15, padding: 8, marginRight: 10, alignItems: 'center', width: 80 },
     categoryIcon: { fontSize: 20 },
