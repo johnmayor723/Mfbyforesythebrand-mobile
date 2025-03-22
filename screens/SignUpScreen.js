@@ -9,12 +9,12 @@ const SignupScreen = ({ navigation }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-
+const endpoint = 'http://93.127.160.233:3060/api/auth/login';
   const handleSignup = async () => {
     setIsLoading(true);
 
     try {
-      const response = await axios.post('https://api.foodliie.com/api/auth/register', { name, email, password });
+      const response = await axios.post('http://http://93.127.160.233:3060/api/auth/register', { name, email, password });
 
       setIsLoading(false);
       Alert.alert(
@@ -30,8 +30,8 @@ const SignupScreen = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-      <Image source={require('../assets/App 1024x1024px.jpg')} style={styles.logo} />
-      <Text style={styles.welcomeText}>Join Market Picks</Text>
+      <Image source={require('../assets/mfbyforesythebrandcom.jpeg')} style={styles.logo} />
+      <Text style={styles.welcomeText}>Join mfbyforesythebrandcom</Text>
 
       <TextInput
         style={styles.input}
@@ -74,17 +74,77 @@ const SignupScreen = ({ navigation }) => {
 };
 
 const styles = StyleSheet.create({
-  container: { flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: '#FFF', paddingHorizontal: 16 },
-  logo: { width: 200, height: 200, marginBottom: 20 },
-  welcomeText: { fontSize: 34, fontWeight: 'bold', color: '#2D7B30', marginBottom: 20 },
-  input: {
-    width: '100%', padding: 15, backgroundColor: '#F0F0F0', borderWidth: 1, borderColor: '#2D7B30',
-    borderRadius: 25, marginBottom: 20, color: '#2D7B30'
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#FFFFFF', // White background
+    paddingHorizontal: 16,
   },
-  button: { backgroundColor: '#FF7E00', padding: 15, borderRadius: 25, width: '100%', alignItems: 'center', marginBottom: 20 },
-  buttonText: { color: '#FFF', fontWeight: 'bold', fontSize: 16 },
-  forgotPasswordText: { color: '#FF7E00', fontSize: 14, alignSelf: 'flex-end', marginBottom: 15 },
-  signupText: { color: '#2D7B30', fontSize: 16 },
+  logo: {
+    width: 200,
+    height: 200,
+    marginBottom: 20,
+  },
+  welcomeText: {
+    fontSize: 34,
+    fontWeight: 'bold',
+    color: '#9B0D54', // Reddish-purple text
+    marginBottom: 20,
+  },
+  input: {
+    width: '100%',
+    padding: 15,
+    backgroundColor: '#F0F0F0',
+    borderWidth: 1,
+    borderColor: '#9B0D54', // Reddish-purple border
+    borderRadius: 25, // Rounded corners
+    marginBottom: 20,
+    color: '#000', // Black text for clear contrast
+  },
+  googleButton: {
+    flexDirection: 'row', // Aligns items horizontally
+    alignItems: 'center', // Centers content vertically
+    justifyContent: 'center', // Centers content horizontally
+    backgroundColor: '#FFFFFF',
+    paddingVertical: 12,
+    paddingHorizontal: 20,
+    borderRadius: 25,
+    borderWidth: 1,
+    borderColor: '#9B0D54', // Reddish-purple border
+    width: '100%',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
+    elevation: 3, // Subtle shadow effect on Android
+  },
+  googleIcon: {
+    width: 24,
+    height: 24,
+    marginRight: 10, // Space between icon and text
+  },
+  googleButtonText: {
+    color: '#9B0D54', // Reddish-purple text
+    fontSize: 16,
+    fontWeight: 'bold',
+  },
+  button: {
+    backgroundColor: '#9B0D54', // Reddish-purple button
+    padding: 15,
+    borderRadius: 25,
+    width: '100%',
+    alignItems: 'center',
+    marginBottom: 20,
+  },
+  buttonText: {
+    color: '#FFFFFF',
+    fontWeight: 'bold',
+    fontSize: 16,
+  },
+  signupText: {
+    color: '#9B0D54', // Reddish-purple text
+    fontSize: 16,
+  },
 });
-
 export default SignupScreen;

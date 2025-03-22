@@ -18,7 +18,7 @@ const AuthScreen = ({navigation}) => {
     setIsLoading(true); // Show loader
 
     try {
-      const endpoint = 'https://api.foodliie.com/api/auth/login';
+      const endpoint = 'http://93.127.160.233:3060/api/auth/login';
       const payload = { email, password };
 
       // Make the API request using axios
@@ -51,10 +51,10 @@ navigation.navigate('GoogleLogin');
   return (
     <View style={styles.container}>
       {/* Logo */}
-      <Image source={require('../assets/App 1024x1024px.jpg')} style={styles.logo} />
+      <Image source={require('../assets/mfbyforesythebrandcom.jpeg')} style={styles.logo} />
 
       {/* Welcome text */}
-      <Text style={styles.welcomeText}>Welcome To Market Picks</Text>
+      <Text style={styles.welcomeText}>Welcome To Mfbyforesythebrand</Text>
 
       {/* Email Input */}
       <TextInput

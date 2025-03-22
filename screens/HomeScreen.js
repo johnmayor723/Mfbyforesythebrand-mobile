@@ -29,7 +29,7 @@ const HomeScreen = () => {
     useEffect(() => {
         const fetchProducts = async () => {
             try {
-                const response = await axios.get('https://api.foodliie.com/api/products');
+                const response = await axios.get('http://93.127.160.233:3060/api/products');
                 setProducts(response.data);
             } catch (error) {
                 console.error('Error fetching products:', error);
@@ -57,7 +57,7 @@ const HomeScreen = () => {
         <ScrollView style={styles.container}>
             {/* Hero Section */}
             <View style={styles.heroSection}>
-                <Image source={require('../assets/Mobile Banner 1200 x 900-1.png')} style={styles.heroImage} />
+                <Image source={require('../assets/heromf.png')} style={styles.heroImage} />
             </View>
 
             {/* Categories Section */}
@@ -99,22 +99,89 @@ const HomeScreen = () => {
 };
 
 const styles = StyleSheet.create({
-    container: { flex: 1, backgroundColor: '#FFFFFF', padding: 16 },
-    heroSection: { alignItems: 'center', marginBottom: 16, marginTop: 20 },
-    heroImage: { width: '100%', height: 130, borderRadius: 10 },
-    categoriesContainer: { paddingVertical: 10, marginTop: 10 },
-    categoryButton: { backgroundColor: '#F0F0F0', borderRadius: 15, padding: 8, marginRight: 10, alignItems: 'center', width: 80 },
-    categoryIcon: { fontSize: 20 },
-    categoryText: { marginTop: 3, textAlign: 'center' },
-    featuredTitle: { fontSize: 20, fontWeight: 'bold', color: '#2D7B30', textAlign: 'center', marginVertical: 10 },
-    card: { backgroundColor: '#FFFFFF', borderRadius: 10, padding: 10, margin: 5, elevation: 3, width: '48%' },
-    cardImage: { width: '100%', height: 100, borderRadius: 10 },
-    cardTitle: { fontWeight: 'bold', marginVertical: 5 },
-    cardPrice: { color: '#2D7B30' },
-    addButton: { backgroundColor: '#2D7B30', padding: 10, borderRadius: 5, alignItems: 'center', marginTop: 5 },
-    buttonText: { color: '#FFFFFF', fontWeight: 'bold' },
-    row: { justifyContent: 'space-between' },
-    loader: { flex: 1, justifyContent: 'center', alignItems: 'center' },
+  container: { 
+    flex: 1, 
+    backgroundColor: '#FFFFFF', 
+    padding: 16 
+  },
+  heroSection: { 
+    alignItems: 'center', 
+    marginBottom: 16, 
+    marginTop: 20 
+  },
+  heroImage: { 
+    width: '100%', 
+    height: 130, 
+    borderRadius: 10 
+  },
+  categoriesContainer: { 
+    paddingVertical: 10, 
+    marginTop: 10 
+  },
+  categoryButton: { 
+    backgroundColor: '#F0F0F0', 
+    borderRadius: 15, 
+    padding: 8, 
+    marginRight: 10, 
+    alignItems: 'center', 
+    width: 80 
+  },
+  categoryIcon: { 
+    fontSize: 20, 
+    color: '#000' // Black for contrast
+  },
+  categoryText: { 
+    marginTop: 3, 
+    textAlign: 'center', 
+    color: '#000' // Black text
+  },
+  featuredTitle: { 
+    fontSize: 20, 
+    fontWeight: 'bold', 
+    color: '#9B0D54', // Reddish-purple
+    textAlign: 'center', 
+    marginVertical: 10 
+  },
+  card: { 
+    backgroundColor: '#FFFFFF', 
+    borderRadius: 10, 
+    padding: 10, 
+    margin: 5, 
+    elevation: 3, 
+    width: '48%' 
+  },
+  cardImage: { 
+    width: '100%', 
+    height: 100, 
+    borderRadius: 10 
+  },
+  cardTitle: { 
+    fontWeight: 'bold', 
+    marginVertical: 5, 
+    color: '#000' // Black text
+  },
+  cardPrice: { 
+    color: '#9B0D54' // Reddish-purple
+  },
+  addButton: { 
+    backgroundColor: '#9B0D54', // Reddish-purple button
+    padding: 10, 
+    borderRadius: 5, 
+    alignItems: 'center', 
+    marginTop: 5 
+  },
+  buttonText: { 
+    color: '#FFFFFF', 
+    fontWeight: 'bold' 
+  },
+  row: { 
+    justifyContent: 'space-between' 
+  },
+  loader: { 
+    flex: 1, 
+    justifyContent: 'center', 
+    alignItems: 'center' 
+  },
 });
 
 export default HomeScreen;

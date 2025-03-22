@@ -15,10 +15,10 @@ const SplashScreen = ({ navigation }) => {
     return (
         <View style={styles.container}>
             <Image
-                source={require('../assets/App 1024x1024px.jpg')} // Make sure you have a logo in the assets folder
+                source={require('../assets/mfbyforesythebrandcom.jpeg')} // Make sure you have a logo in the assets folder
                 style={styles.logo}
             />
-            <Text style={styles.title}>Welcome to Market Picks</Text>
+            <Text style={styles.title}>Welcome to Mfbyforesythebrand</Text>
         </View>
     );
 };
@@ -38,7 +38,7 @@ const styles = StyleSheet.create({
     title: {
         fontSize: 34,
         fontWeight: 'bold',
-        color: '#2D7B30', // Customize the text color
+        color: '#820747', // Customize the text color
     },
 });
 
