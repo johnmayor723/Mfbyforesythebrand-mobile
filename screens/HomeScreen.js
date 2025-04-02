@@ -5,19 +5,19 @@ import axios from 'axios';
 import addToCartService from "../services/addToCartService";
 
 // Categories Data
-const categories = [
-    { id: '1', title: 'Grains & Cereals', icon: '🌾' },
-    { id: '2', title: 'Tubers & Roots', icon: '🥔' },
-    { id: '3', title: 'Vegetables', icon: '🥕' },
-    { id: '4', title: 'Fruits', icon: '🍏' },
-    { id: '5', title: 'Protein (Animal Products)', icon: '🍗' },
-    { id: '6', title: 'Dairy Products', icon: '🥛' },
-    { id: '7', title: 'Legumes & Nuts', icon: '🥜' },
-    { id: '8', title: 'Oils & Fats', icon: '🛢️' },
-    { id: '9', title: 'Spices & Seasonings', icon: '🌶️' },
-    { id: '10', title: 'Flour & Baking Products', icon: '🍞' },
-    { id: '11', title: 'Beverages & Drinks', icon: '🥤' },
-    { id: '12', title: 'Snacks & Processed Foods', icon: '🍫' },
+const fashionCategories = [
+    { id: '1', title: 'Ankara & Wax Prints', icon: '🖌️' },
+    { id: '2', title: 'Kente & Woven Fabrics', icon: '🎭' },
+    { id: '3', title: 'Mudcloth & Tie-Dye', icon: '🎨' },
+    { id: '4', title: 'Beaded & Embellished Wear', icon: '📿' },
+    { id: '5', title: 'Jewelry & Accessories', icon: '💍' },
+    { id: '6', title: 'Headwraps & Turbans', icon: '👳🏾' },
+    { id: '7', title: 'Dashikis & Kaftans', icon: '👕' },
+    { id: '8', title: 'Leather & Traditional Footwear', icon: '🥿' },
+    { id: '9', title: 'Bags & Woven Accessories', icon: '👜' },
+    { id: '10', title: 'Men’s Traditional Wear', icon: '🦺' },
+    { id: '11', title: 'Women’s Traditional Wear', icon: '👗' },
+    { id: '12', title: 'Urban Afrocentric Wear', icon: '🧢' },
 ];
 
 const HomeScreen = () => {
@@ -57,7 +57,7 @@ const HomeScreen = () => {
         <ScrollView style={styles.container}>
             {/* Hero Section */}
             <View style={styles.heroSection}>
-                <Image source={require('../assets/heromf.png')} style={styles.heroImage} />
+                <Image source={require('../assets/hero1.jpg')} style={styles.heroImage} />
             </View>
 
             {/* Categories Section */}
@@ -81,7 +81,7 @@ const HomeScreen = () => {
                 data={products}
                 renderItem={({ item }) => (
                     <TouchableOpacity style={styles.card} onPress={() => navigation.navigate('Single Product', { product: item })}>
-                        <Image source={{ uri: item.imageUrl }} style={styles.cardImage} />
+                        <Image source={{ uri: item.images[0] }} style={styles.cardImage} />
                         <Text style={styles.cardTitle}>{item.name}</Text>
                         <Text style={styles.cardPrice}>From ₦{item.price}</Text>
                         <TouchableOpacity style={styles.addButton} onPress={() => navigation.navigate('Single Product', { product: item })}>
