@@ -5,7 +5,7 @@ import axios from 'axios';
 import addToCartService from "../services/addToCartService";
 
 // Categories Data
-const fashionCategories = [
+const categories = [
     { id: '1', title: 'Ankara & Wax Prints', icon: '🖌️' },
     { id: '2', title: 'Kente & Woven Fabrics', icon: '🎭' },
     { id: '3', title: 'Mudcloth & Tie-Dye', icon: '🎨' },
