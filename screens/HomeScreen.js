@@ -57,7 +57,7 @@ const HomeScreen = () => {
         <ScrollView style={styles.container}>
             {/* Hero Section */}
             <View style={styles.heroSection}>
-                <Image source={require('../assets/hero1.jpg')} style={styles.heroImage} />
+                <Image source={require('../assets/mfbhero.jpg')} style={styles.heroImage} />
             </View>
 
             {/* Categories Section */}
